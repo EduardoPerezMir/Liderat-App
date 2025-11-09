@@ -2,7 +2,7 @@
 Aplicación Móvil destinada a ayudar a sus usuarios a descubrir su estilo de liderazgo. Nuestra app da feedback personalizado con IA y consejos para potenciar las habilidades a partir de las respuestas dadas en el cuestionario principal. Adicionalmente, se incluye contenido informativo y educativo acerca de liderazgo, como también referencias a fuentes externas que puedan ser útiles.
 
 # Requerimientos
-🧩 Requerimientos Funcionales
+## 🧩 Requerimientos Funcionales
 
 RF1 – Pantalla de inicio con menú principal:
 La aplicación debe mostrar un menú principal con acceso al cuestionario principal y también acceso al contenido sobre liderazgo y trabajo en equipo.
@@ -19,7 +19,7 @@ Al completar el cuestionario principal, la aplicación debe mostrar el resultado
 RF5 – Sección de recursos adicionales:
 La app debe ofrecer enlaces o referencias a materiales externos (videos, artículos o guías) sobre liderazgo y trabajo en equipo.
 
-⚙️ Requerimientos No Funcionales
+## ⚙️ Requerimientos No Funcionales
 RNF1 – Usabilidad:
 La interfaz debe ser sencilla y comprensible, con navegación clara entre secciones.
 
@@ -34,3 +34,4 @@ El contenido teórico debe poder visualizarse sin conexión a internet una vez d
 
 RNF5 – Estética y diseño:
 La app debe mantener un diseño simple, limpio y coherente con el tema, utilizando colores y tipografías legibles.
+
