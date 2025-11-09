@@ -1,5 +1,5 @@
 # Liderat-App
-Liderat App
+Aplicación Móvil destinada a ayudar a sus usuarios a descubrir su estilo de liderazgo. Nuestra app da feedback personalizado con IA y consejos para potenciar las habilidades a partir de las respuestas dadas en el cuestionario principal. Adicionalmente, se incluye contenido informativo y educativo acerca de liderazgo, como también referencias a fuentes externas que puedan ser útiles.
 
 # Requerimientos
 🧩 Requerimientos Funcionales
