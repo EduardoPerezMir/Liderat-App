@@ -13,7 +13,7 @@ RF3 – Actividades o ejercicios prácticos:
 La aplicación debe incluir el cuestionario principal, que consiste en una evaluación sobre el estilo de liderazgo.
 
 RF4 – Resultados de actividades:
-Al completar el cuestionario principal, la aplicación debe mostrar el resultado y retroalimentación inmediata. Es decir, definir el estilo de liderazgo del usuario y darle feedback personalizado.
+Al completar el cuestionario principal, la aplicación debe mostrar el resultado y retroalimentación inmediata. Es decir, definir el estilo de liderazgo del usuario y darle feedback personalizado realizado con IA.
 
 RF5 – Sección de recursos adicionales:
 La app debe ofrecer enlaces o referencias a materiales externos (videos, artículos o guías) sobre liderazgo y trabajo en equipo.
