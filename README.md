@@ -3,6 +3,7 @@ Aplicación Móvil destinada a ayudar a sus usuarios a descubrir su estilo de li
 
 # Requerimientos
 🧩 Requerimientos Funcionales
+
 RF1 – Pantalla de inicio con menú principal:
 La aplicación debe mostrar un menú principal con acceso al cuestionario principal y también acceso al contenido sobre liderazgo y trabajo en equipo.
 
