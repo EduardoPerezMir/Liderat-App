@@ -1,0 +1,45 @@
+{
+  "title": "LLQ-25 (Libre) - Estilos de Liderazgo",
+  "scale_min": 1,
+  "scale_max": 5,
+  "labels": ["1 Nunca", "2 Rara vez", "3 A veces", "4 A menudo", "5 Siempre"],
+  "factors": [
+    {"key": "transformational", "label": "Transformacional"},
+    {"key": "democratic", "label": "Democrático"},
+    {"key": "autocratic", "label": "Autocrático"},
+    {"key": "laissez_faire", "label": "Laissez-faire"},
+    {"key": "coaching", "label": "Coaching"}
+  ],
+  "items": [
+    { "id": "T1", "text": "Comparto una visión clara que conecta el trabajo diario con un objetivo mayor.", "factor": "transformational", "reverse": false },
+    { "id": "T2", "text": "Comunico por qué el cambio es necesario y qué impacto positivo buscamos.", "factor": "transformational", "reverse": false },
+    { "id": "T3", "text": "Animo al equipo a cuestionar el estado actual y proponer mejoras.", "factor": "transformational", "reverse": false },
+    { "id": "T4", "text": "Celebro los avances como hitos hacia una meta inspiradora.", "factor": "transformational", "reverse": false },
+
+    { "id": "D1", "text": "Involucro al equipo para definir prioridades y decisiones clave.", "factor": "democratic", "reverse": false },
+    { "id": "D2", "text": "Escucho activamente puntos de vista antes de decidir.", "factor": "democratic", "reverse": false },
+    { "id": "D3", "text": "Explico los criterios que guían la decisión final acordada.", "factor": "democratic", "reverse": false },
+    { "id": "D4", "text": "Fomento acuerdos y reglas compartidas de trabajo.", "factor": "democratic", "reverse": false },
+
+    { "id": "A1", "text": "Establezco instrucciones precisas y espero que se cumplan sin desviaciones.", "factor": "autocratic", "reverse": false },
+    { "id": "A2", "text": "Tomo decisiones rápidas aun si hay opiniones diversas.", "factor": "autocratic", "reverse": false },
+    { "id": "A3", "text": "Superviso de cerca el avance para asegurar el resultado.", "factor": "autocratic", "reverse": false },
+    { "id": "A4", "text": "Uso estándares estrictos para corregir desalineaciones.", "factor": "autocratic", "reverse": false },
+
+    { "id": "L1", "text": "Prefiero intervenir lo menos posible y dejar que el equipo se autoorganice.", "factor": "laissez_faire", "reverse": false },
+    { "id": "L2", "text": "Pospongo mi participación si el equipo puede resolver por sí mismo.", "factor": "laissez_faire", "reverse": false },
+    { "id": "L3", "text": "Tolero variedad de métodos mientras el resultado llegue.", "factor": "laissez_faire", "reverse": false },
+    { "id": "L4", "text": "Raramente establezco procesos detallados de antemano.", "factor": "laissez_faire", "reverse": false },
+
+    { "id": "C1", "text": "Realizo conversaciones 1:1 para identificar objetivos de desarrollo.", "factor": "coaching", "reverse": false },
+    { "id": "C2", "text": "Formulo preguntas que ayuden a la persona a encontrar su propia solución.", "factor": "coaching", "reverse": false },
+    { "id": "C3", "text": "Ofrezco feedback frecuente y accionable.", "factor": "coaching", "reverse": false },
+    { "id": "C4", "text": "Acordamos planes de mejora con hitos y aprendizajes.", "factor": "coaching", "reverse": false },
+
+    { "id": "X1", "text": "Cambio de enfoque (p. ej., de directivo a participativo) según la situación.", "factor": "democratic", "reverse": false },
+    { "id": "X2", "text": "Evito intervenir incluso cuando el rumbo ya es problemático.", "factor": "laissez_faire", "reverse": true },
+    { "id": "X3", "text": "Refuerzo el cumplimiento sin explicar el propósito.", "factor": "autocratic", "reverse": true },
+    { "id": "X4", "text": "Busco activamente propuestas para mejorar el proceso.", "factor": "transformational", "reverse": false },
+    { "id": "X5", "text": "Dedico tiempo a desarrollar habilidades clave del equipo.", "factor": "coaching", "reverse": false }
+  ]
+}

@@ -1,6 +1,6 @@
 {
-    "name": "liderapp",
-    "short_name": "liderapp",
+    "name": "lideratapp",
+    "short_name": "lideratapp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

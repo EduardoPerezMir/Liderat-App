@@ -1,6 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="https" android:host="lideratapp.page.link"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="http" android:host="lideratapp.page.link"/>
+        </intent>
+    </queries>
+    
     <application
-        android:label="liderapp"
+        android:label="LideratApp"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
