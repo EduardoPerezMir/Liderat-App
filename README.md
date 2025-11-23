@@ -1,16 +1,36 @@
-# Lideratapp
+# Liderat-App
+Aplicación Móvil destinada a ayudar a sus usuarios a descubrir su estilo de liderazgo. Nuestra app da feedback personalizado con IA y consejos para potenciar las habilidades a partir de las respuestas dadas en el cuestionario principal. Adicionalmente, se incluye contenido informativo y educativo acerca de liderazgo, como también referencias a fuentes externas que puedan ser útiles.
 
-A new Flutter project.
+# Requerimientos
+## 🧩 Requerimientos Funcionales
 
-## Getting Started
+RF1 – Pantalla de inicio con menú principal:
+La aplicación debe mostrar un menú principal con acceso al cuestionario principal y también acceso al contenido sobre liderazgo y trabajo en equipo.
 
-This project is a starting point for a Flutter application.
+RF2 – Visualización de contenidos teóricos:
+La app debe permitir al usuario leer material teórico sobre liderazgo, estilos de liderazgo y dinámicas de equipo.
 
-A few resources to get you started if this is your first Flutter project:
+RF3 – Actividades o ejercicios prácticos:
+La aplicación debe incluir el cuestionario principal, que consiste en una evaluación sobre el estilo de liderazgo.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+RF4 – Resultados de actividades:
+Al completar el cuestionario principal, la aplicación debe mostrar el resultado y retroalimentación inmediata. Es decir, definir el estilo de liderazgo del usuario y darle feedback personalizado realizado con IA.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+RF5 – Sección de recursos adicionales:
+La app debe ofrecer enlaces o referencias a materiales externos (videos, artículos o guías) sobre liderazgo y trabajo en equipo.
+
+## ⚙️ Requerimientos No Funcionales
+RNF1 – Usabilidad:
+La interfaz debe ser sencilla y comprensible, con navegación clara entre secciones.
+
+RNF2 – Rendimiento:
+Las pantallas deben cargar en menos de 3 segundos en condiciones normales.
+
+RNF3 – Compatibilidad:
+La aplicación debe ser funcional en dispositivos Android de gama media con sistema operativo versión 10 o superior.
+
+RNF4 – Disponibilidad sin conexión:
+El contenido teórico debe poder visualizarse sin conexión a internet una vez descargada la app.
+
+RNF5 – Estética y diseño:
+La app debe mantener un diseño simple, limpio y coherente con el tema, utilizando colores y tipografías legibles.
