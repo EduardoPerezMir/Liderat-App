@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -16,22 +17,49 @@ class ResourcesScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Recursos adicionales")),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(16),
-        itemCount: resources.length,
-        separatorBuilder: (_, _) => const Divider(),
-        itemBuilder: (context, i) {
-          final (title, uri) = resources[i];
-          return ListTile(
-            title: Text(title),
-            trailing: const Icon(Icons.open_in_new),
-            onTap: () async {
-              if (await canLaunchUrl(uri)) { await launchUrl(uri, mode: LaunchMode.externalApplication); }
+      body: Stack(
+        children: [
+          // Fondo con logo difuminado
+          Positioned.fill(
+            child: IgnorePointer(
+              child: Center(
+                child: Opacity(
+                  opacity: 0.25,
+                  child: ImageFiltered(
+                    imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) => Image.asset(
+                        'assets/images/logo.png',
+                        width: constraints.maxWidth * 0.65,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // Lista de recursos
+          ListView.separated(
+            padding: const EdgeInsets.all(16),
+            itemCount: resources.length,
+            separatorBuilder: (_, __) => const Divider(),
+            itemBuilder: (context, i) {
+              final (title, uri) = resources[i];
+              return ListTile(
+                title: Text(title),
+                trailing: const Icon(Icons.open_in_new),
+                onTap: () async {
+                  if (await canLaunchUrl(uri)) {
+                    await launchUrl(uri, mode: LaunchMode.externalApplication);
+                  }
+                },
+              );
             },
-          );
-        },
+          ),
+        ],
       ),
     );
   }
 }
-

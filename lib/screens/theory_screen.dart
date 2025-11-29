@@ -184,7 +184,7 @@ class _TheoryScreenState extends State<TheoryScreen> {
             child: IgnorePointer(
               child: Center(
                 child: Opacity(
-                  opacity: 0.06,
+                  opacity: 0.20,
                   child: ImageFiltered(
                     imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                     child: LayoutBuilder(
