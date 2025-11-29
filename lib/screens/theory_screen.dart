@@ -1,8 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import '../data/theory_pages.dart';
-import 'dart:ui';
+
 class TheoryScreen extends StatefulWidget {
   const TheoryScreen({super.key});
   @override
@@ -15,13 +17,11 @@ class _TheoryScreenState extends State<TheoryScreen> {
   int _loadId = 0; // para evitar carreras
 
   // --- NUEVO: escala de fuente ---
-  double _scale = 1.0;                // 1.0 = base
+  double _scale = 1.0; // 1.0 = base
   static const double _minScale = 0.8;
   static const double _maxScale = 1.8;
-  void _fontSmaller() =>
-      setState(() => _scale = (_scale - 0.1).clamp(_minScale, _maxScale));
-  void _fontBigger() =>
-      setState(() => _scale = (_scale + 0.1).clamp(_minScale, _maxScale));
+  void _fontSmaller() => setState(() => _scale = (_scale - 0.1).clamp(_minScale, _maxScale));
+  void _fontBigger() => setState(() => _scale = (_scale + 0.1).clamp(_minScale, _maxScale));
   void _fontReset() => setState(() => _scale = 1.0);
 
   @override
@@ -55,6 +55,80 @@ class _TheoryScreenState extends State<TheoryScreen> {
   void _next() {
     if (idx < theoryPages.length - 1) {
       setState(() => idx++);
+      _load();
+    }
+  }
+
+  Future<void> _openIndex() async {
+    // Muestra un modal con la lista de páginas. Al seleccionar, actualiza idx y carga.
+    final chosen = await showModalBottomSheet<int>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+      ),
+      builder: (ctx) {
+        return SafeArea(
+          child: DraggableScrollableSheet(
+            expand: false,
+            initialChildSize: 0.7,
+            minChildSize: 0.3,
+            maxChildSize: 0.95,
+            builder: (context, scrollController) {
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.menu_book, size: 20),
+                        const SizedBox(width: 8),
+                        const Expanded(child: Text('Índice de contenidos', style: TextStyle(fontWeight: FontWeight.bold))),
+                        IconButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: const Icon(Icons.close),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(height: 1),
+                  Expanded(
+                    child: ListView.separated(
+                      controller: scrollController,
+                      padding: const EdgeInsets.only(bottom: 24),
+                      itemCount: theoryPages.length,
+                      separatorBuilder: (_, __) => const Divider(height: 1),
+                      itemBuilder: (context, i) {
+                        final p = theoryPages[i];
+                        final selected = i == idx;
+                        return ListTile(
+                          selected: selected,
+                          selectedTileColor: Theme.of(context).colorScheme.primary.withOpacity(0.08),
+                          leading: CircleAvatar(child: Text('${i + 1}')),
+                          title: Text(
+                            p.title,
+                            style: TextStyle(fontWeight: selected ? FontWeight.w700 : FontWeight.w600),
+                          ),
+                          // Si quieres contexto rápido mostramos la ruta del asset como subtítulo ligera.
+                          subtitle: p.assetPath.isNotEmpty
+                              ? Text(p.assetPath, style: const TextStyle(fontSize: 12, color: Colors.black54))
+                              : null,
+                          trailing: selected ? const Icon(Icons.check, color: Colors.green) : null,
+                          onTap: () => Navigator.of(context).pop(i),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      },
+    );
+
+    if (chosen != null && chosen != idx) {
+      setState(() => idx = chosen);
       _load();
     }
   }
@@ -96,6 +170,7 @@ class _TheoryScreenState extends State<TheoryScreen> {
       appBar: AppBar(
         title: Text(page.title),
         actions: [
+          IconButton(onPressed: _openIndex, icon: const Icon(Icons.list)), // <-- índice
           IconButton(onPressed: _fontSmaller, icon: const Icon(Icons.text_decrease)),
           Center(child: Text("${_scale.toStringAsFixed(1)}x")),
           IconButton(onPressed: _fontBigger, icon: const Icon(Icons.text_increase)),
@@ -109,13 +184,13 @@ class _TheoryScreenState extends State<TheoryScreen> {
             child: IgnorePointer(
               child: Center(
                 child: Opacity(
-                  opacity: 0.5, // ajusta intensidad 0.03–0.10
+                  opacity: 0.06,
                   child: ImageFiltered(
                     imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                     child: LayoutBuilder(
                       builder: (context, c) => Image.asset(
                         'assets/images/logo.png',
-                        width: c.maxWidth * 0.75, // tamaño relativo
+                        width: c.maxWidth * 0.65, // tamaño relativo
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -144,7 +219,7 @@ class _TheoryScreenState extends State<TheoryScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(onPressed: idx > 0 ? _prev : null, child: const Text("Anterior")),
-              Text("${idx + 1}/${theoryPages.length}"),
+              TextButton(onPressed: _openIndex, child: Text("${idx + 1}/${theoryPages.length}  •  Ver índice")),
               TextButton(onPressed: idx < theoryPages.length - 1 ? _next : null, child: const Text("Siguiente")),
             ],
           ),

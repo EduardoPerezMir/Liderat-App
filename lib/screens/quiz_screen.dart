@@ -95,13 +95,18 @@ class _QuizScreenState extends State<QuizScreen> {
 
     final answered = _answers.length.clamp(0, _total);
     final progress = _total == 0 ? 0.0 : answered / _total;
-    const legendTextColor = Colors.black87;
+
+    // helper para mapear valor -> etiqueta (ej: "1 Nunca")
+    String labelFor(int val) {
+      final idx = val - schema.scaleMin;
+      if (idx >= 0 && idx < schema.labels.length) return schema.labels[idx];
+      return "$val";
+    }
 
     return GradientScaffold(
       appBar: AppBar(
         title: const Text("Test de Liderazgo"),
         actions: [
-          // Botón opcional para re-mezclar (comenta si no lo quieres)
           IconButton(
             tooltip: 'Re-mezclar',
             icon: const Icon(Icons.shuffle),
@@ -115,21 +120,12 @@ class _QuizScreenState extends State<QuizScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // Header con progreso y leyenda
+          // Header con progreso (sin leyenda global)
           LinearProgressIndicator(value: progress),
           const SizedBox(height: 12),
           Text(
             "Progreso: $answered / $_total • Página ${_page + 1} / $_pageCount",
             style: const TextStyle(color: Colors.white, fontSize: 16),
-          ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 8, runSpacing: -6,
-            children: schema.labels.map((e) => Chip(
-              label: Text(e, style: const TextStyle(
-                  color: legendTextColor, fontWeight: FontWeight.w600)),
-              backgroundColor: Colors.white,
-            )).toList(),
           ),
           const SizedBox(height: 16),
 
@@ -137,7 +133,6 @@ class _QuizScreenState extends State<QuizScreen> {
           ...List.generate(_pageItems.length, (i) {
             final item = _pageItems[i];
             final sel = _answers[item.id];
-            // numeración global (basada en orden mezclado)
             final shownNumber = _startIndex + i + 1; // 1..N
 
             return Card(
@@ -146,39 +141,42 @@ class _QuizScreenState extends State<QuizScreen> {
               margin: const EdgeInsets.only(bottom: 16),
               child: Padding(
                 padding: const EdgeInsets.all(12),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(
-                    "$shownNumber. ${item.text}",
-                    style: const TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8, runSpacing: 8,
-                    children: List.generate(schema.scaleMax - schema.scaleMin + 1, (k) {
-                      final v = schema.scaleMin + k; // 1..5
-                      final selected = sel == v;
-                      return ChoiceChip(
-                        label: Text(
-                          "$v",
-                          style: TextStyle(
-                            color: selected ? Colors.white : Colors.black87,
-                            fontWeight: FontWeight.w600,
-                          ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("$shownNumber. ${item.text}",
+                        style: const TextStyle(fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 6),
+
+                    // Opciones 1..5 con RadioListTile y texto pequeño
+                    ListTileTheme(
+                      dense: true,
+                      horizontalTitleGap: 8,
+                      minLeadingWidth: 0,
+                      child: Column(
+                        children: List.generate(
+                          schema.scaleMax - schema.scaleMin + 1,
+                              (k) {
+                            final v = schema.scaleMin + k; // 1..5
+                            return RadioListTile<int>(
+                              dense: true,
+                              visualDensity: VisualDensity.compact,
+                              contentPadding: EdgeInsets.zero,
+                              value: v,
+                              groupValue: sel,
+                              onChanged: (nv) => setState(() => _answers[item.id] = nv!),
+                              title: Text(
+                                labelFor(v), // "1 Nunca", "2 Rara vez", ...
+                                style: const TextStyle(fontSize: 13),
+                              ),
+
+                            );
+                          },
                         ),
-                        selected: selected,
-                        onSelected: (_) => setState(() => _answers[item.id] = v),
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        visualDensity: VisualDensity.compact,
-                        selectedColor: Theme.of(context).colorScheme.primary,
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.black12),
-                        ),
-                      );
-                    }),
-                  ),
-                ]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           }),
@@ -211,7 +209,6 @@ class _QuizScreenState extends State<QuizScreen> {
           const SizedBox(height: 8),
         ],
       ),
-      // mantenemos tu estética
       gradientColors: const [Color(0xFF0E6FFF), Color(0xFF6EC8FF)],
       watermarkAsset: 'assets/images/logo.png',
       watermarkOpacity: 0.06,
